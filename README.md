@@ -84,8 +84,11 @@ This property specifies how the safe area insets are used to modify the content 
 
 #### Currently supported props are:
 
+- allowsInlineMediaPlayback
 - automaticallyAdjustContentInsets
+- bounces
 - contentInset
+- directionalLockEnabled
 - html (deprecated)
 - injectedJavaScript
 - onError
@@ -93,26 +96,24 @@ This property specifies how the safe area insets are used to modify the content 
 - onLoadEnd
 - onLoadStart
 - onNavigationStateChange
+- onShouldStartLoadWithRequest
+- pagingEnabled
 - renderError
 - renderLoading
+- requiresUserActionForMediaPlayback
+- scrollEnabled
 - source
 - startInLoadingState
 - style
 - url (deprecated)
-- bounces
-- onShouldStartLoadWithRequest
-- pagingEnabled
-- scrollEnabled
-- directionalLockEnabled
 
 ####  Unsupported props are:
 
-- mediaPlaybackRequiresUserAction
-- scalesPageToFit
+- decelerationRate
 - domStorageEnabled
 - javaScriptEnabled
-- allowsInlineMediaPlayback
-- decelerationRate
+- mediaPlaybackRequiresUserAction (use requiresUserActionForMediaPlayback)
+- scalesPageToFit
 
 ### Advanced Communication between React Native and WkWebView
 
