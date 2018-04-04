@@ -495,6 +495,11 @@ class WKWebView extends React.Component {
   };
 }
 
+WKWebView.defaultProps = {
+  allowsInlineMediaPlayback: false,
+  requiresUserActionForMediaPlayback: true,
+}
+
 const RCTWKWebView = requireNativeComponent('RCTWKWebView', WKWebView, {
   nativeOnly: {
     onLoadingStart: true,
