@@ -32,8 +32,27 @@ RCT_ENUM_CONVERTER(UIScrollViewContentInsetAdjustmentBehavior, (@{
 {
   NSDictionary<NSString *, id> *options = [RCTConvert NSDictionary:json];
   WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+  
   config.allowsInlineMediaPlayback = [RCTConvert BOOL:options[@"allowsInlineMediaPlayback"]];
-  config.mediaPlaybackRequiresUserAction = [RCTConvert BOOL:options[@"mediaPlaybackRequiresUserAction"]];;
+  
+  if([RCTConvert BOOL:options[@"requiresUserActionForMediaPlayback"]]){
+    if( [config respondsToSelector:@selector(mediaTypesRequiringUserActionForPlayback)]) {
+      config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeAll;
+    } else if ( [config respondsToSelector:@selector(requiresUserActionForMediaPlayback)]) {
+      config.requiresUserActionForMediaPlayback = YES;
+    } else if ( [config respondsToSelector:@selector(mediaPlaybackRequiresUserAction)]) {
+      config.mediaPlaybackRequiresUserAction = YES;
+    }
+  } else {
+    if( [config respondsToSelector:@selector(mediaTypesRequiringUserActionForPlayback)]) {
+      config.mediaTypesRequiringUserActionForPlayback = WKAudiovisualMediaTypeNone;
+    } else if ( [config respondsToSelector:@selector(requiresUserActionForMediaPlayback)]) {
+      config.requiresUserActionForMediaPlayback = NO;
+    } else if ( [config respondsToSelector:@selector(mediaPlaybackRequiresUserAction)]) {
+      config.mediaPlaybackRequiresUserAction = NO;
+    }
+  }
+  
   return config;
 }
 
